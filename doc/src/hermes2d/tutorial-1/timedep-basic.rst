@@ -1,4 +1,4 @@
-Time-Dependent Problems (09-basic)
+Time-Dependent Problems (09-timedep-basic)
 ----------------------------------
 
 **Git reference:** Tutorial example `09-timedep-basic <http://git.hpfem.org/hermes.git/tree/HEAD:/hermes2d/tutorial/09-timedep-basic>`_. 
@@ -95,7 +95,7 @@ Values for Dirichlet boundary conditions are set via the BCValues class::
 Then the space for the temperature $T$ is set up::
 
     // Initialize an H1 space with default shepeset.
-    H1Space space(&mesh, bc_types, essential_bc_values, P_INIT);
+    H1Space space(&mesh, &bc_types, &bc_values, P_INIT);
     int ndof = Space::get_num_dofs(&space);
     info("ndof = %d.", ndof);
 
@@ -107,7 +107,7 @@ Bilinear and linear forms are defined as follows::
     template<typename Real, typename Scalar>
     Scalar bilinear_form(int n, double *wt, Func<Scalar> *u_ext[], Func<Real> *u, Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
     {
-      return HEATCAP * RHO * int_u_v<Real, Scalar>(n, wt, u, v) / TAU +
+      return HEATCAP * RHO * int_u_v<Real, Scalar>(n, wt, u, v) / time_step +
              LAMBDA * int_grad_u_grad_v<Real, Scalar>(n, wt, u, v);
     }
   
@@ -115,7 +115,7 @@ Bilinear and linear forms are defined as follows::
     Scalar linear_form(int n, double *wt, Func<Scalar> *u_ext[], Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
     {
       Func<Real> *temp_prev = ext->fn[0];
-      return HEATCAP * RHO * int_u_v<Real, Scalar>(n, wt, temp_prev, v) / TAU;
+      return HEATCAP * RHO * int_u_v<Real, Scalar>(n, wt, temp_prev, v) / time_step;
     }
   
     template<typename Real, typename Scalar>
@@ -183,7 +183,7 @@ Assembling and the 'rhs_only' flag
 We are now ready to start the time stepping. Since the stiffness matrix does
 not depend on the solution, it only needs to be assembled once in the first time
 step. For all remaining time steps it will be the same, and we just need to
-re-construct the load vector. This is done via the Boolean variable rhsonly
+re-construct the load vector. This is done via the Boolean variable rhs_only
 which is set to false before the time stepping begins. For completeness, we show 
 the entire time stepping loop below::
 

@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 
   // Enter boundary markers.
   BCTypes bc_types;
-  bc_types.add_bc_dirichlet(Hermes::vector<std::string>(BDY_GROUND));
+  bc_types.add_bc_dirichlet(BDY_GROUND);
   bc_types.add_bc_newton(BDY_AIR);
 
   // Enter Dirichlet boundary values.
@@ -110,8 +110,8 @@ int main(int argc, char* argv[])
   // Initialize weak formulation.
   WeakForm wf;
   wf.add_matrix_form(callback(stac_jacobian_vol));
-  wf.add_vector_form(callback(stac_residual_vol));
   wf.add_matrix_form_surf(callback(stac_jacobian_surf), BDY_AIR);
+  wf.add_vector_form(callback(stac_residual_vol));
   wf.add_vector_form_surf(callback(stac_residual_surf), BDY_AIR);
 
   // Project the initial condition on the FE space to obtain initial solution coefficient vector.

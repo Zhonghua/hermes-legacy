@@ -9,7 +9,7 @@
 //  the surrounding air temperature during one 24-hour cycle. 
 //
 //  PDE: non-stationary heat transfer equation
-//  HEATCAP * RHO * dT/dt - LAMBDA * Laplace T = 0.
+//       HEATCAP * RHO * dT/dt - LAMBDA * Laplace T = 0.
 //
 //  Domain: St. Vitus cathedral (file cathedral.mesh).
 //
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
   // Enter boundary markers.
   BCTypes bc_types;
-  bc_types.add_bc_dirichlet(Hermes::vector<std::string>(BDY_GROUND));
+  bc_types.add_bc_dirichlet(BDY_GROUND);
   bc_types.add_bc_newton(BDY_AIR);
 
   // Enter Dirichlet boundary values.
