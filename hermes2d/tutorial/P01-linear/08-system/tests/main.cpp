@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
   // Load the mesh file.
   Mesh mesh;
   H2DReader mloader;
-  mloader.load("sample.mesh", &mesh);
+  mloader.load("domain.mesh", &mesh);
 
   // Enter boundary markers.
   BCTypes bc_types;
