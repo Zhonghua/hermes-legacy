@@ -1,5 +1,3 @@
-# triangular mesh consisting of 8 triangles for the SCREEN problem
-
 vertices =
 {
   { -1, -1 },

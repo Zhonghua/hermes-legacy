@@ -1,5 +1,3 @@
-# quadrilateral mesh consisting of 4 quads for the SCREEN problem
-
 vertices =
 {
   { -1, -1 },
