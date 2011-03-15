@@ -5,7 +5,6 @@ left = 1;
 top  = 2;
 rest = 3;
 
-
 a = sqrt(l^2 - (l-t)^2)
 b = t
 alpha = atan(b/l)
@@ -17,7 +16,6 @@ d = (l-t)*cos(alpha)
 e = (l-t)*sin(delta)
 f = (l-t)*cos(delta)
 q = sqrt(2)/2
-
 
 vertices =
 {
@@ -47,7 +45,6 @@ vertices =
   { -t, l },       # 20
   { -q*t, l-q*t }  # 21
 }
-
 
 m = 0
 
@@ -95,7 +92,6 @@ boundaries =
   { 12, 5, rest }
 }
 
-
 alpha = 180*alpha/pi
 beta  = 180*beta/pi
 gamma = 180*gamma/pi
@@ -112,5 +108,5 @@ curves =
   { 19, 18, 45.0 },
   { 20, 21, 45.0 },
   { 21, 7, 45.0 }
-};
+}
 
